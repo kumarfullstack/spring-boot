@@ -1,7 +1,8 @@
 package com.employee.controller;
 
-import com.employee.model.Employee;
+import com.employee.model.EmployeeRequest;
 import com.employee.service.EmployeeService;
+import com.employee.service.impl.EmployeeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,41 +15,51 @@ import java.util.List;
 public class EmployeeController {
 
     @Autowired
-    EmployeeService employeeService;
+    private EmployeeService employeeService;
 
     @PostMapping("/create/employee")
-    public ResponseEntity<Employee> createEmployee(@RequestBody Employee employee) {
-        Employee employeeResponse = employeeService.createEmployee(employee);
+    public ResponseEntity<EmployeeRequest> createEmployee(@RequestBody EmployeeRequest employee) {
+        EmployeeRequest employeeResponse = employeeService.createEmployee(employee);
         return new ResponseEntity<>(employeeResponse, HttpStatus.CREATED);
     }
 
+    @GetMapping("/employees")
+    public ResponseEntity<List<EmployeeRequest>> getAllEmployees() {
+        List<EmployeeRequest> employeeList = employeeService.getAllEmployees();
+        return new ResponseEntity<>(employeeList, HttpStatus.OK);
+    }
+
+/*
+
     //fully update of resource
     @PutMapping("/employee/{eId}")
-    public ResponseEntity<Employee> updateEmployeeByEid(@RequestBody Employee employee, @PathVariable String eId) {
-        Employee employeeResponse = employeeService.updateEmployeeByEid(employee, eId);
+    public ResponseEntity<EmployeeRequest> updateEmployeeByEid(@RequestBody EmployeeRequest employee, @PathVariable String eId) {
+        EmployeeRequest employeeResponse = employeeService.updateEmployeeByEid(employee, eId);
         return new ResponseEntity<>(employeeResponse, HttpStatus.OK);
     }
 
     //partialLy update of resource
     @PatchMapping("/employee")
-    public ResponseEntity<Employee> partialLyUpdateEmployeeByEid(@RequestBody Employee employee, @RequestParam("empId") String eId) {
-        Employee employeeResponse = employeeService.partialLyUpdateEmployeeByEid(employee, eId);
+    public ResponseEntity<EmployeeRequest> partialLyUpdateEmployeeByEid(@RequestBody EmployeeRequest employee, @RequestParam("empId") String eId) {
+        EmployeeRequest employeeResponse = employeeService.partialLyUpdateEmployeeByEid(employee, eId);
         return new ResponseEntity<>(employeeResponse, HttpStatus.OK);
     }
 
 
+*/
 /*    @RequestMapping("/employees")
-    @ResponseBody*/
+    @ResponseBody*//*
+
     @GetMapping("/employees")
-    public ResponseEntity<List<Employee>> getAllEmployees() {
-        List<Employee> employeeList = employeeService.getAllEmployees();
+    public ResponseEntity<List<EmployeeRequest>> getAllEmployees() {
+        List<EmployeeRequest> employeeList = employeeService.getAllEmployees();
         return new ResponseEntity<>(employeeList, HttpStatus.OK);
     }
 
 
     @GetMapping("/employees/{eId}")
-    public ResponseEntity<Employee> getEmployeeByEid(@PathVariable String eId) {
-        Employee employee = employeeService.getEmployeeByEid(eId);
+    public ResponseEntity<EmployeeRequest> getEmployeeByEid(@PathVariable String eId) {
+        EmployeeRequest employee = employeeService.getEmployeeByEid(eId);
         return new ResponseEntity<>(employee, HttpStatus.OK);
     }
 
@@ -57,5 +68,6 @@ public class EmployeeController {
         employeeService.deleteEmployeeByEid(eId);
         return new ResponseEntity<String>("Employee has deleted eid : " + eId, HttpStatus.OK);
     }
+*/
 
 }

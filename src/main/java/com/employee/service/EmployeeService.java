@@ -1,20 +1,22 @@
 package com.employee.service;
 
-import com.employee.model.Employee;
+import com.employee.model.EmployeeRequest;
 
 import java.util.List;
 
 public interface EmployeeService {
 
-    public List<Employee> getAllEmployees();
+    EmployeeRequest createEmployee(EmployeeRequest employee);
 
-    Employee createEmployee(Employee employee);
+    public List<EmployeeRequest> getAllEmployees();
+/*
+    public List<EmployeeRequest> getAllEmployees();
 
-    Employee getEmployeeByEid(String eId);
+    EmployeeRequest getEmployeeByEid(String eId);
 
     void deleteEmployeeByEid(String eId);
 
-    Employee updateEmployeeByEid(Employee employee, String eId);
+    EmployeeRequest updateEmployeeByEid(EmployeeRequest employee, String eId);
 
-    Employee partialLyUpdateEmployeeByEid(Employee employee, String eId);
+    EmployeeRequest partialLyUpdateEmployeeByEid(EmployeeRequest employee, String eId);*/
 }
