@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class EmployeeRepositoryImpl {
 
@@ -28,7 +29,7 @@ public class EmployeeRepositoryImpl {
     }
 
     public List<EmployeeRequest> getAllEmployees() {
-        List<EmployeeEntity> employeeEntities =employeeRepository.findAll();
+        List<EmployeeEntity> employeeEntities = employeeRepository.findAll();
         //convert enetites into list request
         List<EmployeeRequest> employeeRequests = new ArrayList<>();
 
@@ -43,41 +44,39 @@ public class EmployeeRepositoryImpl {
         return employeeRequests;
     }
 
-/*
-    public List<EmployeeRequest> getAllEmployees() {
-        return employeeList;
+    public EmployeeRequest getEmployeeByEid(Long eId) {
+        Optional<EmployeeEntity> employeeEntity = employeeRepository.findById(eId);
+        return convertEmployeeEntityToEmployeeRequest(employeeEntity.get());
     }
 
+    public EmployeeRequest updateEmployeeByEid(EmployeeRequest employeeRequest, Long eId) {
+        Optional<EmployeeEntity> employeeEntity = employeeRepository.findById(eId);
 
+        employeeEntity.get().setPin(employeeRequest.getPin());
+        employeeEntity.get().setCity(employeeRequest.getCity());
 
-    public EmployeeRequest getEmployeeByEid(String eId) {
-        Optional<EmployeeRequest> employee = employeeList.stream()
-                .filter(e -> e.geteId().equalsIgnoreCase(eId))
-                .findFirst();
-        return employee.get();
+        EmployeeEntity entity = employeeRepository.save(employeeEntity.get());
+        return convertEmployeeEntityToEmployeeRequest(entity);
     }
 
-    public void deleteEmployeeByEid(String eId) {
-        employeeList.remove(getEmployeeByEid(eId));
+    public EmployeeRequest partialLyUpdateEmployeeByEid(EmployeeRequest employeeRequest, Long eId) {
+        Optional<EmployeeEntity> employeeEntity = employeeRepository.findById(eId);
+        employeeEntity.get().setPin(employeeRequest.getPin());
+
+        EmployeeEntity entity = employeeRepository.save(employeeEntity.get());
+        return convertEmployeeEntityToEmployeeRequest(entity);
     }
 
-    public EmployeeRequest updateEmployeeByEid(EmployeeRequest employee, String eId) {
-        for (EmployeeRequest e : employeeList) {
-            if (e.geteId().equals(eId)) {
-                e.setCity(employee.getCity());
-                e.setPin(employee.getPin());
-            }
-        }
-        return getEmployeeByEid(eId);
+    private EmployeeRequest  convertEmployeeEntityToEmployeeRequest(EmployeeEntity employeeEntity) {
+        EmployeeRequest employeeRequest = new EmployeeRequest();
+        employeeRequest.setId(employeeEntity.getId());
+        employeeRequest.setName(employeeEntity.getName());
+        employeeRequest.setCity(employeeEntity.getCity());
+        employeeRequest.setPin(employeeEntity.getPin());
+        return employeeRequest;
     }
 
-    public EmployeeRequest partialLyUpdateEmployeeByEid(EmployeeRequest employee, String eId) {
-
-        for (EmployeeRequest e : employeeList) {
-            if (e.geteId().equals(eId)) {
-                e.setPin(employee.getPin());
-            }
-        }
-        return getEmployeeByEid(eId);
-    }*/
+    public void deleteEmployeeByEid(Long eId) {
+        employeeRepository.deleteById(eId);
+    }
 }

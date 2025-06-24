@@ -9,14 +9,13 @@ public interface EmployeeService {
     EmployeeRequest createEmployee(EmployeeRequest employee);
 
     public List<EmployeeRequest> getAllEmployees();
-/*
-    public List<EmployeeRequest> getAllEmployees();
 
-    EmployeeRequest getEmployeeByEid(String eId);
+    EmployeeRequest getEmployeeByEid(Long eId);
 
-    void deleteEmployeeByEid(String eId);
+    EmployeeRequest updateEmployeeByEid(EmployeeRequest employee, Long eId);
 
-    EmployeeRequest updateEmployeeByEid(EmployeeRequest employee, String eId);
+    EmployeeRequest partialLyUpdateEmployeeByEid(EmployeeRequest employee, Long eId);
 
-    EmployeeRequest partialLyUpdateEmployeeByEid(EmployeeRequest employee, String eId);*/
+    public void deleteEmployeeByEid(Long eId);
+
 }

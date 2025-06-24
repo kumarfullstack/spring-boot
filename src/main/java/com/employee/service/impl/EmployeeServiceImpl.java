@@ -25,25 +25,24 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeRepositoryImpl.getAllEmployees();
     }
 
-/*
     @Override
-    public EmployeeRequest getEmployeeByEid(String eId) {
-        return employeeRepo.getEmployeeByEid(eId);
+    public EmployeeRequest getEmployeeByEid(Long eId) {
+        return employeeRepositoryImpl.getEmployeeByEid(eId);
     }
 
     @Override
-    public void deleteEmployeeByEid(String eId) {
-        employeeRepo.deleteEmployeeByEid(eId);
+    public EmployeeRequest updateEmployeeByEid(EmployeeRequest employee, Long eId) {
+        return employeeRepositoryImpl.updateEmployeeByEid(employee, eId);
     }
 
     @Override
-    public EmployeeRequest updateEmployeeByEid(EmployeeRequest employee, String eId) {
-        return employeeRepo.updateEmployeeByEid(employee, eId);
+    public EmployeeRequest partialLyUpdateEmployeeByEid(EmployeeRequest employee, Long eId) {
+        return employeeRepositoryImpl.partialLyUpdateEmployeeByEid(employee, eId);
     }
 
     @Override
-    public EmployeeRequest partialLyUpdateEmployeeByEid(EmployeeRequest employee, String eId) {
-        return employeeRepo.partialLyUpdateEmployeeByEid(employee, eId);
+    public void deleteEmployeeByEid(Long eId) {
+        employeeRepositoryImpl.deleteEmployeeByEid(eId);
     }
-*/
+
 }

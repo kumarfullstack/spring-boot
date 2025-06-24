@@ -29,45 +29,30 @@ public class EmployeeController {
         return new ResponseEntity<>(employeeList, HttpStatus.OK);
     }
 
-/*
+    @GetMapping("/employee/{eId}")
+    public ResponseEntity<EmployeeRequest> getEmployeeByEid(@PathVariable Long eId) {
+        EmployeeRequest employee = employeeService.getEmployeeByEid(eId);
+        return new ResponseEntity<>(employee, HttpStatus.OK);
+    }
 
     //fully update of resource
     @PutMapping("/employee/{eId}")
-    public ResponseEntity<EmployeeRequest> updateEmployeeByEid(@RequestBody EmployeeRequest employee, @PathVariable String eId) {
+    public ResponseEntity<EmployeeRequest> updateEmployeeByEid(@RequestBody EmployeeRequest employee, @PathVariable Long eId) {
         EmployeeRequest employeeResponse = employeeService.updateEmployeeByEid(employee, eId);
         return new ResponseEntity<>(employeeResponse, HttpStatus.OK);
     }
 
     //partialLy update of resource
     @PatchMapping("/employee")
-    public ResponseEntity<EmployeeRequest> partialLyUpdateEmployeeByEid(@RequestBody EmployeeRequest employee, @RequestParam("empId") String eId) {
+    public ResponseEntity<EmployeeRequest> partialLyUpdateEmployeeByEid(@RequestBody EmployeeRequest employee, @RequestParam("empId") Long eId) {
         EmployeeRequest employeeResponse = employeeService.partialLyUpdateEmployeeByEid(employee, eId);
         return new ResponseEntity<>(employeeResponse, HttpStatus.OK);
     }
 
-
-*/
-/*    @RequestMapping("/employees")
-    @ResponseBody*//*
-
-    @GetMapping("/employees")
-    public ResponseEntity<List<EmployeeRequest>> getAllEmployees() {
-        List<EmployeeRequest> employeeList = employeeService.getAllEmployees();
-        return new ResponseEntity<>(employeeList, HttpStatus.OK);
-    }
-
-
-    @GetMapping("/employees/{eId}")
-    public ResponseEntity<EmployeeRequest> getEmployeeByEid(@PathVariable String eId) {
-        EmployeeRequest employee = employeeService.getEmployeeByEid(eId);
-        return new ResponseEntity<>(employee, HttpStatus.OK);
-    }
-
-    @DeleteMapping("/employees/{eId}")
-    public ResponseEntity<String> deleteEmployeeByEid(@PathVariable String eId) {
+    @DeleteMapping("/employee/{eId}")
+    public ResponseEntity<String> deleteEmployeeByEid(@PathVariable Long eId) {
         employeeService.deleteEmployeeByEid(eId);
         return new ResponseEntity<String>("Employee has deleted eid : " + eId, HttpStatus.OK);
     }
-*/
 
 }
