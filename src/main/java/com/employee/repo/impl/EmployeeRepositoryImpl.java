@@ -4,6 +4,7 @@ import com.employee.model.EmployeeRequest;
 import com.employee.repo.EmployeeRepository;
 import com.employee.repo.entity.EmployeeEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,4 +80,15 @@ public class EmployeeRepositoryImpl {
     public void deleteEmployeeByEid(Long eId) {
         employeeRepository.deleteById(eId);
     }
+
+    public List<EmployeeRequest> getAllEmployeesByCity(String city) {
+        List<EmployeeEntity> employeeEntityList = employeeRepository.findAllEmployeeByCity(city);
+        List<EmployeeRequest> employeeRequestList = new ArrayList<>();
+        for(EmployeeEntity employeeEntity : employeeEntityList) {
+            employeeRequestList.add(convertEmployeeEntityToEmployeeRequest(employeeEntity));
+        }
+        return employeeRequestList;
+    }
 }
+
+

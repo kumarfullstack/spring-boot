@@ -18,4 +18,5 @@ public interface EmployeeService {
 
     public void deleteEmployeeByEid(Long eId);
 
+    List<EmployeeRequest> getAllEmployeesByCity(String city);
 }

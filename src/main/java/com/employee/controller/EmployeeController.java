@@ -44,7 +44,8 @@ public class EmployeeController {
 
     //partialLy update of resource
     @PatchMapping("/employee")
-    public ResponseEntity<EmployeeRequest> partialLyUpdateEmployeeByEid(@RequestBody EmployeeRequest employee, @RequestParam("empId") Long eId) {
+    public ResponseEntity<EmployeeRequest> partialLyUpdateEmployeeByEid(@RequestBody EmployeeRequest employee,
+                                                                        @RequestParam("empId") Long eId) {
         EmployeeRequest employeeResponse = employeeService.partialLyUpdateEmployeeByEid(employee, eId);
         return new ResponseEntity<>(employeeResponse, HttpStatus.OK);
     }
@@ -53,6 +54,12 @@ public class EmployeeController {
     public ResponseEntity<String> deleteEmployeeByEid(@PathVariable Long eId) {
         employeeService.deleteEmployeeByEid(eId);
         return new ResponseEntity<String>("Employee has deleted eid : " + eId, HttpStatus.OK);
+    }
+
+    @GetMapping("/employees/city")
+    public ResponseEntity<List<EmployeeRequest>> getAllEmployeesByCity(@PathVariable String city) {
+        List<EmployeeRequest> employeeList = employeeService.getAllEmployeesByCity(city);
+        return new ResponseEntity<>(employeeList, HttpStatus.OK);
     }
 
 }

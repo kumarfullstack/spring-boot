@@ -45,4 +45,9 @@ public class EmployeeServiceImpl implements EmployeeService {
         employeeRepositoryImpl.deleteEmployeeByEid(eId);
     }
 
+    @Override
+    public List<EmployeeRequest> getAllEmployeesByCity(String city) {
+        return employeeRepositoryImpl.getAllEmployeesByCity(city);
+    }
+
 }
