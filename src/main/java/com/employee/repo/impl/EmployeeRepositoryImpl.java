@@ -45,9 +45,8 @@ public class EmployeeRepositoryImpl {
         return employeeRequests;
     }
 
-    public EmployeeRequest getEmployeeByEid(Long eId) {
-        Optional<EmployeeEntity> employeeEntity = employeeRepository.findById(eId);
-        return convertEmployeeEntityToEmployeeRequest(employeeEntity.get());
+    public Optional<EmployeeEntity> getEmployeeByEid(Long eId) {
+        return employeeRepository.findById(eId);
     }
 
     public EmployeeRequest updateEmployeeByEid(EmployeeRequest employeeRequest, Long eId) {
@@ -88,6 +87,11 @@ public class EmployeeRepositoryImpl {
             employeeRequestList.add(convertEmployeeEntityToEmployeeRequest(employeeEntity));
         }
         return employeeRequestList;
+    }
+
+    public EmployeeRequest getEmployeeByNameAndCity(String name, String city) {
+        EmployeeEntity employeeEntity = employeeRepository.findByNameAndCity(name, city);
+        return convertEmployeeEntityToEmployeeRequest(employeeEntity);
     }
 }
 

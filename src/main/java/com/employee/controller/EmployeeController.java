@@ -1,5 +1,6 @@
 package com.employee.controller;
 
+import com.employee.exception.EmployeeNotFoundException;
 import com.employee.model.EmployeeRequest;
 import com.employee.service.EmployeeService;
 import com.employee.service.impl.EmployeeServiceImpl;
@@ -30,7 +31,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/employee/{eId}")
-    public ResponseEntity<EmployeeRequest> getEmployeeByEid(@PathVariable Long eId) {
+    public ResponseEntity<EmployeeRequest> getEmployeeByEid(@PathVariable Long eId) throws EmployeeNotFoundException {
         EmployeeRequest employee = employeeService.getEmployeeByEid(eId);
         return new ResponseEntity<>(employee, HttpStatus.OK);
     }
@@ -56,10 +57,17 @@ public class EmployeeController {
         return new ResponseEntity<String>("Employee has deleted eid : " + eId, HttpStatus.OK);
     }
 
-    @GetMapping("/employees/city")
+    @GetMapping("/employees/{city}")
     public ResponseEntity<List<EmployeeRequest>> getAllEmployeesByCity(@PathVariable String city) {
         List<EmployeeRequest> employeeList = employeeService.getAllEmployeesByCity(city);
         return new ResponseEntity<>(employeeList, HttpStatus.OK);
+    }
+
+    @GetMapping("/employee/{name}/{city}")
+    public ResponseEntity<EmployeeRequest> getEmployeeByNameAndCity(@PathVariable String name,
+                                                                          @PathVariable String city) {
+        EmployeeRequest employeeRequest  = employeeService.getEmployeeByNameAndCity(name, city);
+        return new ResponseEntity<>(employeeRequest, HttpStatus.OK);
     }
 
 }

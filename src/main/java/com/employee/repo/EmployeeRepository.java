@@ -13,6 +13,8 @@ import java.util.List;
 public interface EmployeeRepository extends JpaRepository<EmployeeEntity, Long> {
 
     @Query("SELECT e FROM EmployeeEntity e WHERE e.city=:city")
+    //@Query(value = "SELECT * FROM Employee where city=city", nativeQuery = true)
     public List<EmployeeEntity> findAllEmployeeByCity(@Param("city") String city);
 
+    public EmployeeEntity findByNameAndCity(String name, String city);
 }
