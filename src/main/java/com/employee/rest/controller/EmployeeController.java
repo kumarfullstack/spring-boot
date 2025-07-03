@@ -1,4 +1,4 @@
-package com.employee.controller;
+package com.employee.rest.controller;
 
 import com.employee.exception.EmployeeNotFoundException;
 import com.employee.model.EmployeeRequest;
